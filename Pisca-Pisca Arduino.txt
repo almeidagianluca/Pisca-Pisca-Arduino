@@ -1,0 +1,319 @@
+// Projeto Final DS104 - Pisca-Pisca 1.0
+// Gianluca Almeida	21096
+//
+
+#define btn1 2
+#define led1 3
+#define led2 4
+#define led3 5
+#define led4 6
+#define led5 7
+#define led6 8
+#define led7 9
+#define led8 10
+#define led9 11
+
+// Variável para repetir efeitos estáticos no modo inicial
+int x = 0;
+
+// Variável indicativa do modo 0=DEMO, 1=RECEPÇÃO
+int y = 0;
+
+// Varáveis para seleção de efeito no MODO RECEPÇÃO
+char z;
+int a;
+
+void setup()
+{
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+  pinMode(led4, OUTPUT);
+  pinMode(led5, OUTPUT);
+  pinMode(led6, OUTPUT);
+  pinMode(led7, OUTPUT);
+  pinMode(led8, OUTPUT);
+  pinMode(led9, OUTPUT);
+  pinMode(btn1, INPUT_PULLUP);
+  Serial.begin(9600);
+  Serial.println("BEM VINDO AO PROGRAMA PISCA-PISCA 1.0!");
+  Serial.println("Aqui vao algumas instrucoes:");
+  Serial.println("- O led superior indica o modo: ligado(DEMO)/desligado(RECEPCAO)");
+  Serial.println("- Segure o botao ate o efeito acabar para alternar o modo");
+  Serial.println("- No modo RECEPCAO digite um numero de 1 a 5 para escolher o efeito");
+}
+
+void loop()
+{
+  // Mudar modo 
+  if (digitalRead(btn1)==LOW){
+  	while (digitalRead(btn1)==LOW);
+    y++;
+    if (y==2)
+    y=0;;
+  }
+  
+  
+  // Indicar modo
+  if (y==0)
+    digitalWrite(led9, HIGH);
+  if (y==1)
+    digitalWrite(led9, LOW);
+
+  if (y==0){
+  // MODO DEMO
+  while (x<3){
+  // Efeito 1
+  digitalWrite(led1, HIGH);
+  digitalWrite(led3, HIGH);
+  digitalWrite(led5, HIGH);
+  digitalWrite(led7, HIGH);
+  delay(400);
+  digitalWrite(led1, LOW);
+  digitalWrite(led3, LOW);
+  digitalWrite(led5, LOW);
+  digitalWrite(led7, LOW);
+  delay(400);
+  x++;
+  }
+  // Efeito 2
+  digitalWrite(led1, HIGH);
+  delay(200);
+  digitalWrite(led1, LOW);
+  delay(200);
+  digitalWrite(led2, HIGH);
+  delay(200);
+  digitalWrite(led2, LOW);
+  delay(200);
+  digitalWrite(led3, HIGH);
+  delay(200);
+  digitalWrite(led3, LOW);
+  delay(200);
+  digitalWrite(led4, HIGH);
+  delay(200);
+  digitalWrite(led4, LOW);
+  delay(200);
+  digitalWrite(led5, HIGH);
+  delay(200);
+  digitalWrite(led5, LOW);
+  delay(200);
+  digitalWrite(led6, HIGH);
+  delay(200);
+  digitalWrite(led6, LOW);
+  delay(200);
+  digitalWrite(led7, HIGH);
+  delay(200);
+  digitalWrite(led7, LOW);
+  delay(200);
+  digitalWrite(led8, HIGH);
+  delay(200);
+  digitalWrite(led8, LOW);
+  delay(200);
+  while (x<6){
+  // Efeito 3
+  digitalWrite(led2, HIGH);
+  digitalWrite(led4, HIGH);
+  digitalWrite(led6, HIGH);
+  digitalWrite(led8, HIGH);
+  delay(400);
+  digitalWrite(led2, LOW);
+  digitalWrite(led4, LOW);
+  digitalWrite(led6, LOW);
+  digitalWrite(led8, LOW);
+  delay(400);
+  x++;
+  }
+  // Efeito 4
+  digitalWrite(led8, HIGH);
+  delay(200);
+  digitalWrite(led8, LOW);
+  delay(200);
+  digitalWrite(led7, HIGH);
+  delay(200);
+  digitalWrite(led7, LOW);
+  delay(200);
+  digitalWrite(led6, HIGH);
+  delay(200);
+  digitalWrite(led6, LOW);
+  delay(200);
+  digitalWrite(led5, HIGH);
+  delay(200);
+  digitalWrite(led5, LOW);
+  delay(200);
+  digitalWrite(led4, HIGH);
+  delay(200);
+  digitalWrite(led4, LOW);
+  delay(200);
+  digitalWrite(led3, HIGH);
+  delay(200);
+  digitalWrite(led3, LOW);
+  delay(200);
+  digitalWrite(led2, HIGH);
+  delay(200);
+  digitalWrite(led2, LOW);
+  delay(200);
+  digitalWrite(led1, HIGH);
+  delay(200);
+  digitalWrite(led1, LOW);
+  delay(200);
+  while (x<9){
+  // Efeito 5
+  digitalWrite(led1, HIGH);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led3, HIGH);
+  digitalWrite(led4, HIGH);
+  digitalWrite(led5, HIGH);
+  digitalWrite(led6, HIGH);
+  digitalWrite(led7, HIGH);
+  digitalWrite(led8, HIGH);
+  delay(400);
+  digitalWrite(led1, LOW);
+  digitalWrite(led2, LOW);
+  digitalWrite(led3, LOW);
+  digitalWrite(led4, LOW);
+  digitalWrite(led5, LOW);
+  digitalWrite(led6, LOW);
+  digitalWrite(led7, LOW);
+  digitalWrite(led8, LOW);
+  delay(400);
+  x++;
+  }
+  x = 0;
+  }
+  
+// MODO RECEPÇÃO
+  if (y==1){
+  	z = Serial.read();
+    //Comando para que os efeitos fiquem em loop
+    if (z=='1')
+      a = 1;
+    if (z=='2')
+      a = 2;
+    if (z=='3')
+      a = 3;
+    if (z=='4')
+      a = 4;
+    if (z=='5')
+      a = 5;
+    
+    if (a==1){
+      // Efeito 1
+  		digitalWrite(led1, HIGH);
+  		digitalWrite(led3, HIGH);
+  		digitalWrite(led5, HIGH);
+  		digitalWrite(led7, HIGH);
+  		delay(400);
+  		digitalWrite(led1, LOW);
+  		digitalWrite(led3, LOW);
+  		digitalWrite(led5, LOW);
+  		digitalWrite(led7, LOW);
+  		delay(400);
+    }
+    if(a==2){
+      	//Eeito 2
+   		digitalWrite(led1, HIGH);
+  		delay(200);
+  		digitalWrite(led1, LOW);
+  		delay(200);
+ 		digitalWrite(led2, HIGH);
+  		delay(200);
+  		digitalWrite(led2, LOW);
+  		delay(200);
+  		digitalWrite(led3, HIGH);
+  		delay(200);
+  		digitalWrite(led3, LOW);
+  		delay(200);
+  		digitalWrite(led4, HIGH);
+  		delay(200);
+  		digitalWrite(led4, LOW);
+  		delay(200);
+  		digitalWrite(led5, HIGH);
+  		delay(200);
+  		digitalWrite(led5, LOW);
+  		delay(200);
+  		digitalWrite(led6, HIGH);
+  		delay(200);
+  		digitalWrite(led6, LOW);
+  		delay(200);
+  		digitalWrite(led7, HIGH);
+  		delay(200);
+  		digitalWrite(led7, LOW);
+ 		delay(200);
+  		digitalWrite(led8, HIGH);
+  		delay(200);
+  		digitalWrite(led8, LOW);
+  		delay(200);
+    }
+    if (a==3){
+      	//Efeito 3
+  		digitalWrite(led2, HIGH);
+  		digitalWrite(led4, HIGH);
+  		digitalWrite(led6, HIGH);
+  		digitalWrite(led8, HIGH);
+  		delay(400);
+  		digitalWrite(led2, LOW);
+  		digitalWrite(led4, LOW);
+  		digitalWrite(led6, LOW);
+  		digitalWrite(led8, LOW);
+  		delay(400);
+    }
+    if (a==4){
+      	//Efeito 4
+  		digitalWrite(led8, HIGH);
+  		delay(200);
+  		digitalWrite(led8, LOW);
+  		delay(200);
+  		digitalWrite(led7, HIGH);
+  		delay(200);
+  		digitalWrite(led7, LOW);
+  		delay(200);
+  		digitalWrite(led6, HIGH);
+  		delay(200);
+  		digitalWrite(led6, LOW);
+  		delay(200);
+  		digitalWrite(led5, HIGH);
+  		delay(200);
+  		digitalWrite(led5, LOW);
+  		delay(200);
+  		digitalWrite(led4, HIGH);
+  		delay(200);
+  		digitalWrite(led4, LOW);
+  		delay(200);
+  		digitalWrite(led3, HIGH);
+  		delay(200);
+  		digitalWrite(led3, LOW);
+  		delay(200);
+  		digitalWrite(led2, HIGH);
+  		delay(200);
+  		digitalWrite(led2, LOW);
+  		delay(200);
+  		digitalWrite(led1, HIGH);
+  		delay(200);
+  		digitalWrite(led1, LOW);
+  		delay(200);  
+    }
+    if (a==5){
+  		digitalWrite(led1, HIGH);
+  		digitalWrite(led2, HIGH);
+  		digitalWrite(led3, HIGH);
+  		digitalWrite(led4, HIGH);
+  		digitalWrite(led5, HIGH);
+  		digitalWrite(led6, HIGH);
+  		digitalWrite(led7, HIGH);
+  		digitalWrite(led8, HIGH);
+  		delay(400);
+  		digitalWrite(led1, LOW);
+  		digitalWrite(led2, LOW);
+  		digitalWrite(led3, LOW);
+  		digitalWrite(led4, LOW);
+  		digitalWrite(led5, LOW);
+  		digitalWrite(led6, LOW);
+  		digitalWrite(led7, LOW);
+  		digitalWrite(led8, LOW);
+  		delay(400);  
+    }
+  }
+
+}
+
+
